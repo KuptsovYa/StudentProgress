@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{js/profile.js}" charset="utf-8"></script>
+    <link rel="stylesheet" th:href="@{css/profile.css}" type="text/css"/>
+    <title>Title</title>
+</head>
+
+<table id="filter-table">
+    <tr>
+        <th>Название</th>
+        <th>Приоритет</th>
+        <th>СУТЬ</th>
+        <th>Очки</th>
+        <th>Добавить дело</th>
+    </tr>
+    <tr class='table-filters'>
+        <td>
+            <input type="text" id="task-name"/>
+        </td>
+        <td>
+            <select id="task-priority">
+                <option value="low" selected="selected">
+                    Низкий приоритет
+                </option>
+                <option value="medium">
+                    Средний приоритет
+                </option>
+                <option value="high">
+                    Высокий приоритет
+                </option>
+            </select>
+        </td>
+        <td>
+            <input type="text" id="task-content"/>
+        </td>
+        <td>
+            <input type="text" id="task-points" pattern="\d [0-9]"/>
+        </td>
+        <td>
+            <button id="addTask">Добавить дело</button>
+        </td>
+    </tr>
+    <tr class='table-data'></tr>
+</table>
+</html>

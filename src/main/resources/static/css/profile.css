@@ -1,0 +1,12 @@
+#filter-table {
+    width: 100%;
+}
+
+#filter-table th {
+    background-color: #dadada;
+}
+
+#filter-table td, #filter-table th {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}

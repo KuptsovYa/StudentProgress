@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{js/index1.js}" charset="utf-8"></script>
+    <link rel="stylesheet" th:href="@{css/index1.css}" type="text/css"/>
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h3>
+        Органайзер
+    </h3>
+</div>
+<div>
+    <h3>
+        <p id="vmaintext" class="mainText" readonly="readonly"> Органайзер</p>
+    </h3>
+</div>
+<div>
+    <button>
+        <a href="#" id="reg">Регистрация</a>
+    </button>
+    <button>
+        <a href="#" id="loginhref">Войти в профиль</a>
+    </button>
+</div>
+
+
+<div id="modal_form_login" style="display: none; top: 45%; opacity: 0;">
+    <span id="modal_close_login">X</span>
+    <form id="loginform" method="post" th:action="@{/}">
+        <h3>Войти в профиль</h3>
+        <p>
+            <label for="login">Ваш логин</label>
+            <br>
+            <input id="login" type="text" name="login" value="" size="35">
+        </p>
+        <p>
+            <label for="password">Ваш пароль</label>
+            <br>
+            <input id="password" type="password" name="password" value="" size="35">
+        </p>
+        <p style="text-align: center; padding-bottom: 10px;">
+            <button type="submit" value="Отправить" id="submitbtn" name="submit">Отправить</button>
+            <br>
+        </p>
+        <p style="display: none" id="vinvalidpass_login">
+            <label for="vinvalidpass_login">Некорректные данные</label>
+        </p>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    </form>
+</div>
+<div id="overlay_login" style="display: none;"></div>
+
+
+<div id="modal_form_reg" style="display: none; top: 45%; opacity: 0;">
+    <span id="modal_close_reg">X</span>
+    <form>
+        <h3>Регистрация</h3>
+        <p>
+            <label for="vlogin_reg">Ваш логин</label>
+            <br>
+            <input id="vlogin_reg" type="text" name="loginreg" value="" size="35">
+        </p>
+        <p>
+            <label for="vpassword_reg">Ваш пароль</label>
+            <br>
+            <input id="vpassword_reg" type="text" name="passwordreg" value="" size="35">
+        </p>
+        <p>
+            <label for="vinvalidpass_reg">Повторите пароль</label>
+            <br>
+            <input id="vpasswordRepeat_reg" type="text" name="your-password-repeat" value="" size="35">
+        </p>
+        <p style="text-align: center; padding-bottom: 10px;">
+            <button type="button" value="Отправить" id="submitbtn_reg">Отправить</button>
+            <br>
+        </p>
+        <p style="display: none" id="vinvalidpass_reg">
+            <label for="vinvalidpass_reg">Некорректные данные</label>
+        </p>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    </form>
+</div>
+<div id="overlay_reg" style="display: none;"></div>
+
+
+</body>
+</html>
+
+
+
+
