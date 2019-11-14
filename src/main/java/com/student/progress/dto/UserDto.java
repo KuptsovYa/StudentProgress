@@ -4,7 +4,6 @@ public class UserDto {
 
     private String login;
     private String password;
-//    private RoleDto roles;
 
     public UserDto() {
 

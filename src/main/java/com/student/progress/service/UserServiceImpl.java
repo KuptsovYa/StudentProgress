@@ -23,10 +23,10 @@ public class UserServiceImpl implements UserService {
     public UserDto addAUser(UserDto userDTO) {
         try {
             logger.info("Adding new user " + userDTO);
-            UserDto usersEntity = new UserDto();
-            usersEntity.setLogin(userDTO.getLogin());
-            usersEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-            userRepository.addAUser(usersEntity);
+            UserDto user = new UserDto();
+            user.setLogin(userDTO.getLogin());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            userRepository.addAUser(user);
             logger.info("New user " + userDTO + " added database");
             return userDTO;
         } catch (Exception e) {

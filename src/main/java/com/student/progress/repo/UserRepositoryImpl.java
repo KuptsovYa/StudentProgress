@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository<UserDto> {
@@ -18,9 +19,10 @@ public class UserRepositoryImpl implements UserRepository<UserDto> {
         this.jdbcOperations = jdbcOperations;
     }
 
+    @Transactional
     @Override
     public void addAUser(UserDto user) {
-        String queryForUser = "INSERT INTO user(UserName, password) VALUES (?, ?)";
+        String queryForUser = "INSERT INTO users(userName, password) VALUES (?, ?)";
         Object[] params = new Object[]{user.getLogin(), user.getPassword()};
         jdbcOperations.update(queryForUser, params);
 
