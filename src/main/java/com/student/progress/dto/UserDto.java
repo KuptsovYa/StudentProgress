@@ -2,6 +2,7 @@ package com.student.progress.dto;
 
 public class UserDto {
 
+    private int idUsers;
     private String login;
     private String password;
     private int roleId;
@@ -9,10 +10,25 @@ public class UserDto {
     public UserDto() {
     }
 
+    public UserDto(int idUsers, String login, String password, int roleId) {
+        this.idUsers = idUsers;
+        this.login = login;
+        this.password = password;
+        this.roleId = roleId;
+    }
+
     public UserDto(String login, String password, int roleId) {
         this.login = login;
         this.password = password;
         this.roleId = roleId;
+    }
+
+    public int getIdUsers() {
+        return idUsers;
+    }
+
+    public void setIdUsers(int idUsers) {
+        this.idUsers = idUsers;
     }
 
     public int getRoleId() {

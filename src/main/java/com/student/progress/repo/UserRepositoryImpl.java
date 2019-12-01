@@ -35,7 +35,7 @@ public class UserRepositoryImpl implements UserRepository<UserDto> {
 
     @Override
     public UserDto findByLogin(String login) {
-        String sql = "SELECT idUser, UserName, password FROM user WHERE UserName = ?";
+        String sql = "SELECT idUsers, userName, password FROM users WHERE userName = ?";
         Object[] params = new Object[]{login};
         UserDto userEntity = (UserDto) jdbcOperations.queryForObject(sql, params, new BeanPropertyRowMapper(UserDto.class));
         return userEntity;
