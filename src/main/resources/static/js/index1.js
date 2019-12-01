@@ -101,7 +101,9 @@ $(document).ready(function () {
                         url: '/registration',
                         contentType: "application/json",
                         dataType: 'json',
-                        data: JSON.stringify({login: $('#vlogin_reg').val(), password: $('#vpassword_reg').val()}),
+                        data: JSON.stringify({login: $('#vlogin_reg').val(),
+                                                    password: $('#vpassword_reg').val(),
+                                                    roleId: 0}),
                         cache: false,
                         async: false,
                         success: function (result) {

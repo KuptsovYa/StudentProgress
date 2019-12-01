@@ -10,4 +10,5 @@ public interface UserRepository<P extends UserDto>{
     boolean checkEqualsLogin(P p);
 
     UserDto findByLogin(String login);
+
 }

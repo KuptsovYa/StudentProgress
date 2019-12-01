@@ -4,33 +4,28 @@ import com.student.progress.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcOperations;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository<UserDto> {
 
     private JdbcOperations jdbcOperations;
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserRepositoryImpl(JdbcOperations jdbcOperations) {
         this.jdbcOperations = jdbcOperations;
     }
 
-    @Transactional
     @Override
     public void addAUser(UserDto user) {
-        String queryForUser = "INSERT INTO users(userName, password) VALUES (?, ?)";
-        Object[] params = new Object[]{user.getLogin(), user.getPassword()};
+        String queryForUser = "INSERT INTO users(userName, password, Role_roleId) VALUES (?, ?, (SELECT idRole from role where idRole = ?))";
+        Object[] params = new Object[]{user.getLogin(), user.getPassword(), user.getRoleId()};
         jdbcOperations.update(queryForUser, params);
-
     }
 
     @Override
     public boolean checkEqualsLogin(UserDto user) {
-        String sql = "SELECT COUNT(*) FROM user WHERE UserName = ?";
+        String sql = "SELECT COUNT(*) FROM users WHERE userName = ?";
         Object[] params = new Object[]{user.getLogin()};
         Integer count = jdbcOperations.queryForObject(sql, params, Integer.class);
         if (count != null) {

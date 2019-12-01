@@ -4,16 +4,24 @@ public class UserDto {
 
     private String login;
     private String password;
+    private int roleId;
 
     public UserDto() {
-
     }
 
-    public UserDto(String login, String password) {
+    public UserDto(String login, String password, int roleId) {
         this.login = login;
         this.password = password;
+        this.roleId = roleId;
     }
 
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = Integer.valueOf(roleId);
+    }
 
     public String getLogin() {
         return login;
