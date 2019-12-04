@@ -30,7 +30,8 @@ public class UserRepositoryImpl implements UserRepository<UserDto> {
         Integer count = jdbcOperations.queryForObject(sql, params, Integer.class);
         if (count != null) {
             return true;
-        } else return false;
+        }
+        return false;
     }
 
     @Override

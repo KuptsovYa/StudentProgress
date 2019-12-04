@@ -1,0 +1,23 @@
+SQL SCRIPT FOR SELECT SINGLE STUDENT BY FIRSTNAME AND SECONDNAME;
+
+Select Date.date, assessment.assessment, Discipline.disciplineName
+FROM Person, PersonToDiscipline, Discipline, Assessment, Date
+WHERE Person.personFirstName = 'Александр'
+AND Person.personSecondName = 'Моисеев'
+AND Person.idPerson = persontodiscipline.idPerson
+AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline
+AND PersonToDiscipline.idAssessment = Assessment.idAssessment
+AND PersonToDiscipline.idDate = Date.idDate;
+
+FOR SELECTING WHOLE GROUP PROGRESS;
+
+Select DateTable.date, assessment.assessment, Discipline.disciplineName, Person.personFirstName, Person.personSecondName
+FROM Person, PersonToDiscipline, Discipline, Assessment, DateTable, GroupTable, Speciality
+WHERE Speciality.specialityName = 'РКЛМ' 
+AND Speciality.idSpeciality = Person.idSpeciality  
+AND GroupTable.GroupName = '12'
+AND GroupTable.idGroup = Person.idGroup
+AND Person.idPerson = PersonToDiscipline.idPerson
+AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline
+AND PersonToDiscipline.idAssessment = Assessment.idAssessment
+AND PersonToDiscipline.idDate = DateTable.idDate;
