@@ -1,14 +1,15 @@
 package com.student.progress.repo;
 
 
-import com.student.progress.dto.UserDto;
+import com.student.progress.entity.dto.UserDataTransferObject;
+import com.student.progress.entity.entities.UserEntity;
 
-public interface UserRepository<P extends UserDto>{
+public interface UserRepository<P extends UserDataTransferObject>{
 
     void addAUser(P p);
 
     boolean checkEqualsLogin(P p);
 
-    UserDto findByLogin(String login);
+    UserEntity findByLogin(String login);
 
 }

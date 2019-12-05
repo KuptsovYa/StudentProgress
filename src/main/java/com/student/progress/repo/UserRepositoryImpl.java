@@ -1,13 +1,14 @@
 package com.student.progress.repo;
 
-import com.student.progress.dto.UserDto;
+import com.student.progress.entity.dto.UserDataTransferObject;
+import com.student.progress.entity.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserRepositoryImpl implements UserRepository<UserDto> {
+public class UserRepositoryImpl implements UserRepository<UserDataTransferObject> {
 
     private JdbcOperations jdbcOperations;
 
@@ -17,14 +18,14 @@ public class UserRepositoryImpl implements UserRepository<UserDto> {
     }
 
     @Override
-    public void addAUser(UserDto user) {
+    public void addAUser(UserDataTransferObject user) {
         String queryForUser = "INSERT INTO users(userName, password, Role_roleId) VALUES (?, ?, (SELECT idRole from role where idRole = ?))";
         Object[] params = new Object[]{user.getLogin(), user.getPassword(), user.getRoleId()};
         jdbcOperations.update(queryForUser, params);
     }
 
     @Override
-    public boolean checkEqualsLogin(UserDto user) {
+    public boolean checkEqualsLogin(UserDataTransferObject user) {
         String sql = "SELECT COUNT(*) FROM users WHERE userName = ?";
         Object[] params = new Object[]{user.getLogin()};
         Integer count = jdbcOperations.queryForObject(sql, params, Integer.class);
@@ -35,10 +36,10 @@ public class UserRepositoryImpl implements UserRepository<UserDto> {
     }
 
     @Override
-    public UserDto findByLogin(String login) {
+    public UserEntity findByLogin(String login) {
         String sql = "SELECT idUsers, userName, password FROM users WHERE userName = ?";
         Object[] params = new Object[]{login};
-        UserDto userEntity = (UserDto) jdbcOperations.queryForObject(sql, params, new BeanPropertyRowMapper(UserDto.class));
+        UserEntity userEntity = (UserEntity) jdbcOperations.queryForObject(sql, params, new BeanPropertyRowMapper(UserEntity.class));
         return userEntity;
     }
 }

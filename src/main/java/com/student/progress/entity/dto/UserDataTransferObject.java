@@ -1,23 +1,25 @@
-package com.student.progress.dto;
+package com.student.progress.entity.dto;
 
-public class UserDto {
+import com.student.progress.entity.DataTransferObject;
+
+public class UserDataTransferObject extends DataTransferObject {
 
     private int idUsers;
     private String login;
     private String password;
     private int roleId;
 
-    public UserDto() {
+    public UserDataTransferObject() {
     }
 
-    public UserDto(int idUsers, String login, String password, int roleId) {
+    public UserDataTransferObject(int idUsers, String login, String password, int roleId) {
         this.idUsers = idUsers;
         this.login = login;
         this.password = password;
         this.roleId = roleId;
     }
 
-    public UserDto(String login, String password, int roleId) {
+    public UserDataTransferObject(String login, String password, int roleId) {
         this.login = login;
         this.password = password;
         this.roleId = roleId;
@@ -57,7 +59,7 @@ public class UserDto {
 
     @Override
     public String toString() {
-        return "UserDto{" +
+        return "UserDataTransferObject{" +
                 "login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 '}';

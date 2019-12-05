@@ -1,6 +1,6 @@
-package com.student.progress.controller;
+package com.student.progress.controller.rest;
 
-import com.student.progress.dto.UserDto;
+import com.student.progress.entity.dto.UserDataTransferObject;
 import com.student.progress.exc.FailAddingUserException;
 import com.student.progress.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class IndexRestController {
 
     @ResponseStatus
     @PutMapping("/registration")
-    public UserDto registration(@RequestBody UserDto userDTO) throws FailAddingUserException{
+    public UserDataTransferObject registration(@RequestBody UserDataTransferObject userDTO) throws FailAddingUserException{
         if (userService.addAUser(userDTO) == null){
             throw new FailAddingUserException();
         }

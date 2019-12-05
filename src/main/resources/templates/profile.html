@@ -7,14 +7,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{js/profile.js}" charset="utf-8"></script>
     <link rel="stylesheet" th:href="@{css/profile.css}" type="text/css"/>
-    <title>Title</title>
+    <link href="profile.css" rel="stylesheet" type="text/css">
+<title>Title</title>
 </head>
 <body>
 <div id="main-frame1">
     <div id="main-frame2">
         <div id="main-frame3">
             <div id="main-frame-input-fro-single-stud-text">
-                <h3>Посмотреть расписание студента</h3>
+                <h3>Посмотреть успеваймость студента</h3>
                 <h2>Введите фамилию и имя студента</h2>
             </div>
             <div id="main-frame-input-fro-single-stud">
@@ -27,25 +28,34 @@
         <div id="table-frame2">
             <table id="main-table-frame">
                 <caption> Название чего-то</caption>
-                <tr id="table-frame-date"> Дата
-                    <th> Дата-1</th>
-                    <th> Дата-2</th>
-                    <th> Дата-3</th>
+                <tr id="table-frame-date">
+					<th> Дата</th>
+                    <th colspan="2"> Дата-1</th>
+                    <th colspan="4"> Дата-2</th>
+                    <th colspan="2"> Дата-3</th>
                 </tr>
                 <tr id="table-frame-discipline">
-                    <td colspan="1">
-                    <td> Предмет1</td>
-                    <td> Предмет2</td>
-                    </td>
-                    <td colspan="2">
-                    <td> Предмет1</td>
-                    <td> Предмет2</td>
-                    </td>
-                    <td colspan="3">
-                    <td> Предмет1</td>
-                    <td> Предмет2</td>
-                    </td>
+					<th> Предметы</th>
+                    <th> Предмет1</th>
+                    <th> Предмет2</th>
+                    <th> Предмет1</th>
+					<th> Предмет2</th>
+                    <th> Предмет1</th>
+                    <th> Предмет2</th>
+					<th> Предмет2</th>
+					<th> Предмет2</th>
                 </tr>
+				<tr id="table-frame-students">
+					<th>Иванов Иван</th>
+					<td>Хорошо</td>
+					<td>Хорошо</td>
+					<td>Хорошо</td>
+					<td>Хорошо</td>
+					<td>Хорошо</td>
+					<td>Хорошо</td>
+					<td>Хорошо</td>
+					<td>Хорошо</td>
+				</tr>
             </table>
         </div>
     </div>

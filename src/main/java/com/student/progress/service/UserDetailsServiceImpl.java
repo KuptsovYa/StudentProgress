@@ -1,7 +1,7 @@
 package com.student.progress.service;
 
 
-import com.student.progress.dto.UserDto;
+import com.student.progress.entity.entities.UserEntity;
 import com.student.progress.repo.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         logger.info("User with username " + s + " trying to authorise");
         try {
-            UserDto usersEntity = userRepository.findByLogin(s);
+            UserEntity usersEntity = userRepository.findByLogin(s);
             if (usersEntity == null){
                 throw new UsernameNotFoundException("User with login: " + s + " not found");
             }

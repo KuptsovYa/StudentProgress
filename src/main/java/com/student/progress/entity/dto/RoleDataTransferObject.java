@@ -1,13 +1,13 @@
-package com.student.progress.dto;
+package com.student.progress.entity.dto;
 
+import com.student.progress.entity.DataTransferObject;
 import org.springframework.security.core.GrantedAuthority;
 
-public class Role implements GrantedAuthority {
-
+public class RoleDataTransferObject extends DataTransferObject implements GrantedAuthority{
 
     private String role;
 
-    public Role(String role) {
+    public RoleDataTransferObject(String role) {
         this.role = role;
     }
 

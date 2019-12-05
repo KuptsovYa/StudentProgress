@@ -1,11 +1,11 @@
 package com.student.progress.service;
 
 
-import com.student.progress.dto.UserDto;
+import com.student.progress.entity.dto.UserDataTransferObject;
 
 public interface UserService {
 
-    UserDto addAUser(UserDto userDTO);
+    UserDataTransferObject addAUser(UserDataTransferObject userDTO);
 
     boolean checkEqualsLogin(String login);
 
