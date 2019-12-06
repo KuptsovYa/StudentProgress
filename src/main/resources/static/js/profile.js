@@ -6,27 +6,28 @@ $(document).ready(function () {
         xhr.setRequestHeader(header, token);
     });
 
-    $('select[name=selector]').change(function() { alert($(this).val()); });
-    alert( $("#task-priority option:selected").val());
 
-    $('#addTask').click(function () {
-        alert( $("#task-priority option:selected").val());
+    $('#getDataByName').click(function () {
+        var studDataTransferObject ={};
+        studDataTransferObject.personFirstName = $('#firstName-input').val();
+        studDataTransferObject.personSecondName = $('#lastName-input').val();
+
+        console.log($('#firstName-input').val() + $('#lastName-input').val());
+        console.log(JSON.stringify(studDataTransferObject));
         $.ajax({
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            url: '/profile/addTask',
+            type: 'POST',
+            url: '/profile/getByName',
+            contentType: "application/json;charset=UTF-8",
             dataType: 'json',
-            data: JSON.stringify({
-                taskName: $('#task-name').val(),
-                taskPriority: $("#task-priority option:selected").val(),
-                taskContent: $('#task-content').val(),
-                taskPoints: $('#task-points').val()
-            })
+            processData: false,
+            data: JSON.stringify(studDataTransferObject),
+            cache: false,
+            async: false
         }).fail(function (error) {
-            console.log(error);
+            console.log('AJAX call failed :(');
         }).done(function (data) {
+            console.log('AJAX call was successfully executed ;)');
+            console.log('data = ', data);
             console.log(data);
         })
     });

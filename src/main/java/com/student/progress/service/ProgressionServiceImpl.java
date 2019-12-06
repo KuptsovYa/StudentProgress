@@ -21,7 +21,7 @@ public class ProgressionServiceImpl implements ProgressionService {
 
     @Override
     public Object getProgression(StudDataTransferObject userDto) {
-        logger.info("User looking for " + userDto.getFirstName() + " " + userDto.getSecondName());
+        logger.info("User looking for " + userDto.getPersonFirstName() + " " + userDto.getPersonSecondName());
         return progressionService.getProgressionByStudName(userDto);
     }
 

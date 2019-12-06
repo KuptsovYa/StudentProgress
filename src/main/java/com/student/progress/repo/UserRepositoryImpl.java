@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepositoryImpl implements UserRepository<UserDataTransferObject> {
 
-    private JdbcOperations jdbcOperations;
+    private final JdbcOperations jdbcOperations;
 
     @Autowired
     public UserRepositoryImpl(JdbcOperations jdbcOperations) {

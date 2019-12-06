@@ -9,6 +9,9 @@ public class UserEntity extends Entity {
     private String password;
     private int role_idRole;
 
+    public UserEntity() {
+    }
+
     public UserEntity(int idUser, String userName, String password, int role_idRole) {
         this.idUser = idUser;
         this.userName = userName;

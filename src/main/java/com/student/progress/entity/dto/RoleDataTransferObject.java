@@ -7,6 +7,9 @@ public class RoleDataTransferObject extends DataTransferObject implements Grante
 
     private String role;
 
+    public RoleDataTransferObject() {
+    }
+
     public RoleDataTransferObject(String role) {
         this.role = role;
     }

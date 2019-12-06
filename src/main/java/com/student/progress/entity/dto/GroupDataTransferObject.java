@@ -7,6 +7,9 @@ public class GroupDataTransferObject extends DataTransferObject {
     private String groupName;
     private String groupNumber;
 
+    public GroupDataTransferObject() {
+    }
+
     public GroupDataTransferObject(String groupName, String groupNumber) {
         this.groupName = groupName;
         this.groupNumber = groupNumber;
