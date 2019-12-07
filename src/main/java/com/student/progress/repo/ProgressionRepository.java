@@ -2,11 +2,13 @@ package com.student.progress.repo;
 
 import com.student.progress.entity.dto.GroupDataTransferObject;
 import com.student.progress.entity.dto.StudDataTransferObject;
-import com.student.progress.entity.dto.UserDataTransferObject;
+
+import java.util.List;
+import java.util.Map;
 
 public interface ProgressionRepository {
 
-    Object getProgressionByStudName(StudDataTransferObject studDataTransferObjectDto);
+    List<Map<String, Object>> getProgressionByStudName(StudDataTransferObject studDataTransferObjectDto);
 
-    Object getProgressionByStudGroup(GroupDataTransferObject groupDataTransferObject);
+    List<Map<String, Object>> getProgressionByStudGroup(GroupDataTransferObject groupDataTransferObject);
 }

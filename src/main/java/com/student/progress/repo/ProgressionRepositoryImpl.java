@@ -20,7 +20,7 @@ public class ProgressionRepositoryImpl implements ProgressionRepository {
     }
 
     @Override
-    public Object getProgressionByStudName(StudDataTransferObject studDataTransferObject) {
+    public List<Map<String, Object>> getProgressionByStudName(StudDataTransferObject studDataTransferObject) {
         String sql = "Select DateTable.date, assessment.assessment, Discipline.disciplineName " +
                 "FROM Person, PersonToDiscipline, Discipline, Assessment, DateTable " +
                 "WHERE Person.personFirstName = ? " +
@@ -36,7 +36,7 @@ public class ProgressionRepositoryImpl implements ProgressionRepository {
     }
 
     @Override
-    public Object getProgressionByStudGroup(GroupDataTransferObject groupDataTransferObject) {
+    public List<Map<String, Object>> getProgressionByStudGroup(GroupDataTransferObject groupDataTransferObject) {
         String sql = "Select DateTable.date, assessment.assessment, Discipline.disciplineName, Person.personFirstName, Person.personSecondName\n" +
                 "FROM Person, PersonToDiscipline, Discipline, Assessment, DateTable, GroupTable, Speciality\n" +
                 "WHERE Speciality.specialityName = ?\n" +
@@ -47,7 +47,7 @@ public class ProgressionRepositoryImpl implements ProgressionRepository {
                 "AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline\n" +
                 "AND PersonToDiscipline.idAssessment = Assessment.idAssessment\n" +
                 "AND PersonToDiscipline.idDate = DateTable.idDate;";
-        Object result = jdbcOperations.queryForList(sql,
+        List<Map<String, Object>> result = jdbcOperations.queryForList(sql,
                 new Object[]{groupDataTransferObject.getGroupName(),
                         groupDataTransferObject.getGroupNumber()});
         return result;
