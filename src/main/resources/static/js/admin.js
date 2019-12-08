@@ -78,14 +78,31 @@ $(document).ready(function () {
                 $('#add-person-group-assessment' + i + '').append('<option id="assessment'+k+'" value="' + DATA[1][k] + '">' + DATA[1][k] + '</option>');
             }
             $('#assessment-discipline-div').append('</div>');
-
         }
 
     }
 
+    $('#getDataByGroup').click(function () {
+        var values = {};
+        values.name = $('#add-person-input-first-name').val();
 
-// <select id="add-person-group-discipline">
-//         </select>
-//         <select id="add-person-group-assessment">
-//         </select>
+        for (var i = 0; i < ; i++) {
+
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/admin/insertData',
+            contentType: "application/json;charset=UTF-8",
+            dataType: 'json',
+            processData: false,
+            data: JSON.stringify(value),
+            cache: false,
+            async: false
+        }).fail(function (error) {
+            console.log(error);
+            console.log('AJAX call failed :(');
+        }).done(function (data1) {
+            appendDiscipline(data1);
+        });
+    });
 });
