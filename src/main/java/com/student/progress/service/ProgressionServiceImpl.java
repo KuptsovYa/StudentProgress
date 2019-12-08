@@ -15,18 +15,18 @@ import java.util.*;
 @Service
 public class ProgressionServiceImpl implements ProgressionService {
 
-    private final ProgressionRepository progressionService;
+    private final ProgressionRepository progressionRepository;
     private Logger logger = LogManager.getLogger(this);
 
     @Autowired
-    public ProgressionServiceImpl(ProgressionRepository progressionService) {
-        this.progressionService = progressionService;
+    public ProgressionServiceImpl(ProgressionRepository progressionRepository) {
+        this.progressionRepository = progressionRepository;
     }
 
     @Override
     public Map<String, List<Grade>> getProgression(StudDataTransferObject userDto) {
         logger.info("User looking for " + userDto.getPersonFirstName() + " " + userDto.getPersonSecondName());
-        List<Map<String, Object>> result = progressionService.getProgressionByStudName(userDto);
+        List<Map<String, Object>> result = progressionRepository.getProgressionByStudName(userDto);
         return transformValues(result);
     }
 
@@ -105,6 +105,6 @@ public class ProgressionServiceImpl implements ProgressionService {
     @Override
     public Map<String, List<NamedGrade>> getProgression(GroupDataTransferObject groupDto) {
         logger.info("User looking for " + groupDto + " group");
-        return transformValuesForGroup(progressionService.getProgressionByStudGroup(groupDto));
+        return transformValuesForGroup(progressionRepository.getProgressionByStudGroup(groupDto));
     }
 }

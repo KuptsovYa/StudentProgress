@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,5 +16,29 @@
 </head>
 <body>
 <h4>adminka</h4>
+<div id="add-person-name">
+    <div>
+        <h5>Напишите имя нового учащегося</h5>
+        <input id="add-person-input-first-name" type=text placeholder="Имя"/>
+        <input id="add-person-input-last-name" type=text placeholder="Фамилия"/>
+    </div>
+    <div id="add-person-group">
+        <h5>Добавить существующую группу ему</h5>
+        <select id="add-person-group-name" class="group-name">
+        </select>
+        <select id="add-person-group-number">
+        </select>
+    </div>
+
+    <div id="add-person-assessment">
+        <h5>Добавить ему оценку</h5>
+        <select id="add-person-group-date">
+        </select>
+        <div>
+            <div id="assessment-discipline-div">
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

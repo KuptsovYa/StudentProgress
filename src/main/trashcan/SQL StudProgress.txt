@@ -21,3 +21,7 @@ AND Person.idPerson = PersonToDiscipline.idPerson
 AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline
 AND PersonToDiscipline.idAssessment = Assessment.idAssessment
 AND PersonToDiscipline.idDate = DateTable.idDate;
+
+SELECT disciplineName FROM Speciality s, SpecialityToDiscipline std, Discipline d WHERE s.specialityName = 'ИБС'
+                AND s.idSpeciality = std.idSpeciality
+                AND std.idDiscipline = d.idDiscipline
