@@ -1,6 +1,7 @@
 package com.student.progress.controller.rest;
 
 import com.student.progress.entity.Grade;
+import com.student.progress.entity.NamedGrade;
 import com.student.progress.entity.dto.GroupDataTransferObject;
 import com.student.progress.entity.dto.StudDataTransferObject;
 import com.student.progress.service.ProgressionService;
@@ -26,8 +27,9 @@ public class ProfileRestController {
         return progressionService.getProgression(studDataTransferObject);
     }
 
-    @PutMapping("/profile/getByGroup")
-    public Object getProgressionByGroupName(GroupDataTransferObject groupDataTransferObject){
+    @PostMapping("/profile/getByGroup")
+    @ResponseBody
+    public Map<String, List<NamedGrade>> getProgressionByGroupName(@RequestBody final GroupDataTransferObject groupDataTransferObject){
         return progressionService.getProgression(groupDataTransferObject);
     }
 }

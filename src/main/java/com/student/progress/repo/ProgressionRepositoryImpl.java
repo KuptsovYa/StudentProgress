@@ -37,15 +37,15 @@ public class ProgressionRepositoryImpl implements ProgressionRepository {
 
     @Override
     public List<Map<String, Object>> getProgressionByStudGroup(GroupDataTransferObject groupDataTransferObject) {
-        String sql = "Select DateTable.date, assessment.assessment, Discipline.disciplineName, Person.personFirstName, Person.personSecondName\n" +
-                "FROM Person, PersonToDiscipline, Discipline, Assessment, DateTable, GroupTable, Speciality\n" +
-                "WHERE Speciality.specialityName = ?\n" +
-                "AND Speciality.idSpeciality = Person.idSpeciality  \n" +
-                "AND GroupTable.GroupName = ?\n" +
-                "AND GroupTable.idGroup = Person.idGroup\n" +
-                "AND Person.idPerson = PersonToDiscipline.idPerson\n" +
-                "AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline\n" +
-                "AND PersonToDiscipline.idAssessment = Assessment.idAssessment\n" +
+        String sql = "Select DateTable.date, assessment.assessment, Discipline.disciplineName, Person.personFirstName, Person.personSecondName " +
+                "FROM Person, PersonToDiscipline, Discipline, Assessment, DateTable, GroupTable, Speciality " +
+                "WHERE Speciality.specialityName = ? " +
+                "AND Speciality.idSpeciality = Person.idSpeciality " +
+                "AND GroupTable.GroupName = ? " +
+                "AND GroupTable.idGroup = Person.idGroup " +
+                "AND Person.idPerson = PersonToDiscipline.idPerson " +
+                "AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline " +
+                "AND PersonToDiscipline.idAssessment = Assessment.idAssessment " +
                 "AND PersonToDiscipline.idDate = DateTable.idDate;";
         List<Map<String, Object>> result = jdbcOperations.queryForList(sql,
                 new Object[]{groupDataTransferObject.getGroupName(),
