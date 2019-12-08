@@ -41,10 +41,10 @@ public class UserServiceImpl implements UserService {
 
     private UserDataTransferObject setRoleForUser(UserDataTransferObject userDtoExternal, UserDataTransferObject currentUser){
         if (userDtoExternal.getLogin().equals("admin") && userDtoExternal.getPassword().equals("admin")){
-            currentUser.setRoleId("1");
+            currentUser.setRoleId("2");
             return currentUser;
         }
-        currentUser.setRoleId("2");
+        currentUser.setRoleId("1");
         return currentUser;
     }
 
@@ -58,5 +58,10 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
+    }
+
+    @Override
+    public String getRoleByLoginAndPassword(String login, String password) {
+        return userRepository.getRoleByCred(login, password);
     }
 }

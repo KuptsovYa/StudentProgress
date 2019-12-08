@@ -2,7 +2,6 @@ package com.student.progress.service;
 
 import com.student.progress.entity.dto.RoleDataTransferObject;
 import com.student.progress.entity.entities.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,16 +12,17 @@ import java.util.Set;
 public class UserDetailsImpl implements UserDetails {
 
     private final UserEntity usersEntity;
+    private final UserService userService;
 
-    @Autowired
-    public UserDetailsImpl(UserEntity usersEntity) {
+    public UserDetailsImpl(UserEntity usersEntity, UserService userService) {
         this.usersEntity = usersEntity;
+        this.userService = userService;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<RoleDataTransferObject> roles = new HashSet<>();
-        roles.add(new RoleDataTransferObject("User"));
+        roles.add(new RoleDataTransferObject(userService.getRoleByLoginAndPassword(getUsername(), getPassword())));
         return roles;
     }
 

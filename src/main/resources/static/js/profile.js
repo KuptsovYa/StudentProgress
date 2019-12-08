@@ -78,7 +78,6 @@ $(document).ready(function () {
         }).done(function (data) {
             $('#main-table-frame tr,th').remove();
             appendDefault();
-            console.log(data);
             appendTOGroup(data);
         })
     });

@@ -9,4 +9,5 @@ public interface UserService {
 
     boolean checkEqualsLogin(String login);
 
+    String getRoleByLoginAndPassword(String login, String password);
 }

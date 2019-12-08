@@ -2,6 +2,7 @@ package com.student.progress.conf;
 
 import com.student.progress.repo.UserRepository;
 import com.student.progress.service.UserDetailsServiceImpl;
+import com.student.progress.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,8 @@ public class SecurityBeanConfig {
 
     @Autowired
     public UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -24,6 +27,6 @@ public class SecurityBeanConfig {
     @Primary
     @Bean(name = "MyUserDetailsService")
     public UserDetailsService getUserDetailsService(){
-        return new UserDetailsServiceImpl(userRepository);
+        return new UserDetailsServiceImpl(userRepository, userService);
     }
 }

@@ -42,5 +42,15 @@ public class UserRepositoryImpl implements UserRepository<UserDataTransferObject
         UserEntity userEntity = (UserEntity) jdbcOperations.queryForObject(sql, params, new BeanPropertyRowMapper(UserEntity.class));
         return userEntity;
     }
+
+    @Override
+    public String getRoleByCred(String login, String password) {
+        String sql = "SELECT roleName FROM users, role WHERE userName = ?" +
+                "and password = ?" +
+                "and Role_roleId = idRole";
+        Object[] params = new Object[]{login, password};
+        String role = jdbcOperations.queryForObject(sql, params, String.class);
+        return role;
+    }
 }
 

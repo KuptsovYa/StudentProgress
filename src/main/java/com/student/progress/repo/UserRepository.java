@@ -12,4 +12,5 @@ public interface UserRepository<P extends UserDataTransferObject>{
 
     UserEntity findByLogin(String login);
 
+    String getRoleByCred(String login, String password);
 }
