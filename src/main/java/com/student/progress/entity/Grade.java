@@ -10,6 +10,9 @@ public class Grade {
         this.discipline = discipline;
     }
 
+    public Grade() {
+    }
+
     public String getAssessment() {
         return assessment;
     }

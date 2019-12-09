@@ -2,6 +2,7 @@ package com.student.progress.controller.rest;
 
 
 import com.student.progress.entity.dto.GroupDataTransferObject;
+import com.student.progress.entity.dto.NewStudInsertDataTransformObject;
 import com.student.progress.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,5 +35,10 @@ public class AdminRestController {
     @PostMapping("/admin/getDisciplines")
     public List<String> getDiscipline(@RequestBody GroupDataTransferObject group){
         return adminService.getDisciplineByGroup(group);
+    }
+
+    @PostMapping("/admin/insertData")
+    public String insertStudData(@RequestBody NewStudInsertDataTransformObject studInsertDataTransformObject){
+        return adminService.insertStudData(studInsertDataTransformObject);
     }
 }

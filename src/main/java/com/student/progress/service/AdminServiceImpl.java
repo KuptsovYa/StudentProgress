@@ -1,6 +1,7 @@
 package com.student.progress.service;
 
 import com.student.progress.entity.dto.GroupDataTransferObject;
+import com.student.progress.entity.dto.NewStudInsertDataTransformObject;
 import com.student.progress.repo.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<String> getDisciplineByGroup(GroupDataTransferObject group) {
         return adminRepository.getDisciplineByGroup(group);
+    }
+
+    @Override
+    public String insertStudData(NewStudInsertDataTransformObject studInsertDataTransformObject) {
+        return adminRepository.insertStudData(studInsertDataTransformObject);
     }
 }

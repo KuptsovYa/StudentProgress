@@ -20,6 +20,7 @@ $(document).ready(function () {
 
     getGroups();
     var DATA;
+    var DISCIPLINE_DATA;
 
     function append(data) {
         console.log(data);
@@ -68,41 +69,50 @@ $(document).ready(function () {
 
     function appendDiscipline(data1) {
         $('#assessment-discipline-div').empty();
-        console.log(DATA);
-        console.log(data1);
+        DISCIPLINE_DATA = data1;
         for (var i = 0; i < data1.length; i++) {
             $('#assessment-discipline-div').append('<div>');
-            $('#assessment-discipline-div').append('<input id="add-person-group-discipline'+i+'" value="' + data1[i] + '" readonly="readonly"/>');
+            $('#assessment-discipline-div').append('<input id="add-person-group-discipline' + i + '" value="' + data1[i] + '" readonly="readonly"/>');
             $('#assessment-discipline-div').append('<select id="add-person-group-assessment' + i + '"></select>');
-            for (var k = 0; k < DATA[1].length; k++){
-                $('#add-person-group-assessment' + i + '').append('<option id="assessment'+k+'" value="' + DATA[1][k] + '">' + DATA[1][k] + '</option>');
+            for (var k = 0; k < DATA[1].length; k++) {
+                $('#add-person-group-assessment' + i + '').append('<option id="assessment' + k + '" value="' + DATA[1][k] + '">' + DATA[1][k] + '</option>');
             }
             $('#assessment-discipline-div').append('</div>');
         }
 
     }
 
-    $('#getDataByGroup').click(function () {
-        var values = {};
-        values.name = $('#add-person-input-first-name').val();
-
-        for (var i = 0; i < ; i++) {
-
+    $('#insertData').click(function () {
+        var studInsertDataTransformObject = {};
+        studInsertDataTransformObject.firstName = $('#add-person-input-first-name').val();
+        studInsertDataTransformObject.secondName = $('#add-person-input-last-name').val();
+        studInsertDataTransformObject.date = $("#add-person-group-date option:selected").text();
+        studInsertDataTransformObject.groupNum = $('#add-person-group-number option:selected').text();
+        studInsertDataTransformObject.groupName = $('#add-person-group-name option:selected').text();
+        var assessmentValues = [];
+        console.log(DISCIPLINE_DATA);
+        for (var i = 0; i < DISCIPLINE_DATA.length; i++) {
+            assessmentValues.push({
+                assessment: $('#add-person-group-assessment'+i+' option:selected').text(),
+                discipline: $('#add-person-group-discipline'+i+'').val()
+            })
         }
+        studInsertDataTransformObject.assessmentValues = assessmentValues;
+        console.log(studInsertDataTransformObject);
         $.ajax({
             type: 'POST',
             url: '/admin/insertData',
             contentType: "application/json;charset=UTF-8",
             dataType: 'json',
             processData: false,
-            data: JSON.stringify(value),
+            data: JSON.stringify(studInsertDataTransformObject),
             cache: false,
             async: false
         }).fail(function (error) {
             console.log(error);
             console.log('AJAX call failed :(');
-        }).done(function (data1) {
-            appendDiscipline(data1);
+        }).done(function (result) {
+            console.log(result);
         });
     });
 });

@@ -35,7 +35,6 @@ public class ProgressionServiceImpl implements ProgressionService {
         Map<String, List<Grade>> transformedResult = new HashMap<>();
         List<String> sortedDates = getDates(result);
         List<Grade> gradeList = new ArrayList<>();
-        Collections.reverse(sortedDates);
         int j = 0;
         for (int i = 0; i < result.size(); i++) {
             String date = (String) result.get(i).get("date");
