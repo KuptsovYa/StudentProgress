@@ -19,20 +19,51 @@ public class ProgressionRepositoryImpl implements ProgressionRepository {
         this.jdbcOperations = jdbcOperations;
     }
 
+    private static final String PROGRESSION_BY_STUD_NAME_QUERY = "Select DateTable.date, assessment.assessment, Discipline.disciplineName " +
+            "FROM Person, PersonToDiscipline, Discipline, Assessment, DateTable " +
+            "WHERE Person.personFirstName = ? " +
+            "AND Person.personSecondName = ? " +
+            "AND Person.idPerson = persontodiscipline.idPerson " +
+            "AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline " +
+            "AND PersonToDiscipline.idAssessment = Assessment.idAssessment " +
+            "AND PersonToDiscipline.idDate = DateTable.idDate;";
+
     @Override
     public List<Map<String, Object>> getProgressionByStudName(StudDataTransferObject studDataTransferObject) {
-        String sql = "Select DateTable.date, assessment.assessment, Discipline.disciplineName " +
-                "FROM Person, PersonToDiscipline, Discipline, Assessment, DateTable " +
-                "WHERE Person.personFirstName = ? " +
-                "AND Person.personSecondName = ? " +
-                "AND Person.idPerson = persontodiscipline.idPerson " +
-                "AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline " +
-                "AND PersonToDiscipline.idAssessment = Assessment.idAssessment " +
-                "AND PersonToDiscipline.idDate = DateTable.idDate;";
-        List<Map<String, Object>> result = jdbcOperations.queryForList(sql,
-                new Object[]{studDataTransferObject.getPersonFirstName(),
-                        studDataTransferObject.getPersonSecondName()});
+        List<Map<String, Object>> result = jdbcOperations.queryForList(PROGRESSION_BY_STUD_NAME_QUERY,
+                studDataTransferObject.getPersonFirstName(),
+                studDataTransferObject.getPersonSecondName());
         return result;
+    }
+
+    private List<Map<String, Object>> getProgressionByStudName(String firstName, String lastName) {
+        List<Map<String, Object>> result = jdbcOperations.queryForList(PROGRESSION_BY_STUD_NAME_QUERY,
+                firstName,
+                lastName);
+        return result;
+    }
+
+    @Override
+    public Integer getDisciplineCountGroup(String groupName, String groupNumber) {
+        String sql = "select count(*) from (select distinct discipline.disciplineName " +
+                "from person, speciality, specialityToDiscipline, discipline,groupTable " +
+                "where speciality.specialityName = ? " +
+                "and groupTable.groupName = ? " +
+                "and person.idGroup = groupTable.idGroup " +
+                "and person.idSpeciality = Speciality.idSpeciality " +
+                "and specialityToDiscipline.idSpeciality = speciality.idspeciality " +
+                "and specialityToDiscipline.idDiscipline = Discipline.idDiscipline) as result ";
+        return jdbcOperations.queryForObject(sql, new Object[]{groupName, groupNumber}, Integer.class);
+    }
+
+    public Integer getPeopleCountInGroup(String groupName, String groupNumber) {
+        String sqlForPeople = "SELECT count(*) from (Select Person.personFirstName, Person.personSecondName " +
+                "FROM Person, GroupTable, Speciality " +
+                "WHERE Speciality.specialityName = ? " +
+                "AND Speciality.idSpeciality = Person.idSpeciality " +
+                "AND GroupTable.GroupName = ? " +
+                "AND GroupTable.idGroup = Person.idGroup) as result";
+        return jdbcOperations.queryForObject(sqlForPeople, new Object[]{groupName, groupNumber}, Integer.class);
     }
 
     @Override
@@ -48,8 +79,8 @@ public class ProgressionRepositoryImpl implements ProgressionRepository {
                 "AND PersonToDiscipline.idAssessment = Assessment.idAssessment " +
                 "AND PersonToDiscipline.idDate = DateTable.idDate;";
         List<Map<String, Object>> result = jdbcOperations.queryForList(sql,
-                new Object[]{groupDataTransferObject.getGroupName(),
-                        groupDataTransferObject.getGroupNumber()});
+                groupDataTransferObject.getGroupName(),
+                groupDataTransferObject.getGroupNumber());
         return result;
     }
 }

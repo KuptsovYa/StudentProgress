@@ -67,11 +67,14 @@ public class ProgressionServiceImpl implements ProgressionService {
         return new NamedGrade(defGrade.getAssessment(), defGrade.getDiscipline(), firstName + " " + lastName);
     }
 
-    private Map<String, List<NamedGrade>> transformValuesForGroup(List<Map<String, Object>> result) {
+    private Map<String, List<NamedGrade>> transformValuesForGroup(List<Map<String, Object>> result,
+                                                                  Integer disciplineCount,
+                                                                  Integer peopleCount) {
         if (result == null) return null;
         List<NamedGrade> gradeList = new ArrayList<>();
         Map<String, List<NamedGrade>> transformedResult = new HashMap<>();
         List<String> sortedDates = getDates(result);
+
         int j = 0;
         for (int i = 0; i < result.size(); i++) {
             String date = (String) result.get(i).get("date");
@@ -87,7 +90,20 @@ public class ProgressionServiceImpl implements ProgressionService {
                 transformedResult.put(date, gradeList);
             }
         }
-        return transformedResult;
+        return deletePeople(transformedResult, disciplineCount, peopleCount);
+    }
+
+    private Map<String, List<NamedGrade>> deletePeople(Map<String, List<NamedGrade>> transformedPeople, Integer disciplineCount, Integer peopleCount){
+        List<String> listToRemove = new ArrayList<>();
+        for (Map.Entry<String, List<NamedGrade>> entry : transformedPeople.entrySet()){
+            if(entry.getValue().size() % disciplineCount*peopleCount != 0){
+                listToRemove.add(entry.getKey());
+            }
+        }
+        for (String item : listToRemove){
+            transformedPeople.remove(item);
+        }
+        return transformedPeople;
     }
 
     private List<String> getDates(List<Map<String, Object>> result) {
@@ -104,6 +120,8 @@ public class ProgressionServiceImpl implements ProgressionService {
     @Override
     public Map<String, List<NamedGrade>> getProgression(GroupDataTransferObject groupDto) {
         logger.info("User looking for " + groupDto + " group");
-        return transformValuesForGroup(progressionRepository.getProgressionByStudGroup(groupDto));
+        return transformValuesForGroup(progressionRepository.getProgressionByStudGroup(groupDto),
+                progressionRepository.getPeopleCountInGroup(groupDto.getGroupName(), groupDto.getGroupNumber()),
+                progressionRepository.getDisciplineCountGroup(groupDto.getGroupName(), groupDto.getGroupNumber()));
     }
 }

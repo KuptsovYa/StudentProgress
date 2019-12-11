@@ -11,4 +11,8 @@ public interface ProgressionRepository {
     List<Map<String, Object>> getProgressionByStudName(StudDataTransferObject studDataTransferObjectDto);
 
     List<Map<String, Object>> getProgressionByStudGroup(GroupDataTransferObject groupDataTransferObject);
+
+    Integer getPeopleCountInGroup(String groupName, String groupNum);
+
+    Integer getDisciplineCountGroup(String groupName, String groupNum);
 }
