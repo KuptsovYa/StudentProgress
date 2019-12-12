@@ -1,6 +1,6 @@
 #modal_form_reg {
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     border-radius: 5px;
     border: 3px #000 solid;
     background: #fff;
@@ -39,8 +39,8 @@
 }
 
 #modal_form_login {
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
     border-radius: 5px;
     border: 3px #000 solid;
     background: #fff;

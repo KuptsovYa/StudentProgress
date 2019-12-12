@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Raleway');
+
+
+
+body{
+background-image: url(../images/fon.png);
+font-family: "Lato";
+font-weight: 300;
+font-size: 16px;
+
+
+ -webkit-font-smoothing: antialiased;
+ color:#FFFAFA;
+}
+
+h1, h2, h3, h4 ,h5, h6{
+  font-family: "Raleway";
+  font-weight: 300;
+  font-size: 2.5em;
+  letter-spacing: 0.1em;
+  color: rgb(142,11,0);
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.6);
+}
+.centered {
+  text-align: center;
+}
+
+p{
+  line-height: 28px;
+}
+
+#headerwrap{
+  margin-top: 10%;
+  margin-left: 41%;
+  text-align: center;
+}
+
+.w{
+margin-top: 3%;
+padding-top: 35px;
+}
+.w h4{
+  font-size: 30px;
+}
+.btn11{
+  margin: 5px;
+  margin-left: 41%;
+  font-family: "Raleway";
+  font-weight: 300;
+  background-color:#1E90FF;
+  color:#FFFAFA;
+}
+.btn12{
+  margin: 5px;
+  font-family: "Raleway";
+  font-weight: 300;
+  background-color:#1E90FF;
+  color:#FFFAFA;
+}
+
+.gameclass1, .gameclass2 {
+    overflow: auto;
+    resize: none;
+    outline: none;
+    width: 500px;
+    height: auto;
+    font-family: Verdana;
+    line-height: 1.5em;
+    color: rgb(10,120,255);
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}

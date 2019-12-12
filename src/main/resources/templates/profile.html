@@ -8,37 +8,38 @@
     <script type="text/javascript" th:src="@{js/profile.js}" charset="utf-8"></script>
     <link rel="stylesheet" th:href="@{css/profile.css}" type="text/css"/>
     <link href="profile.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Title</title>
 </head>
 <body>
-<div id="main-frame1">
-    <div id="main-frame2">
-		<h3>Посмотреть успеваймость студента</h3>
-        <div id="main-frame3">
+<div id="main-frame1" class="container">
+    <div id="main-frame2" class="row">
+
+        <div id="main-frame3" class="col-sm mt-5 ml-3">
             <div id="main-frame-input-fro-single-stud-text">
                 <h2>Введите фамилию и имя студента</h2>
             </div>
             <div id="main-frame-input-fro-single-stud">
-                <input id="firstName-input" name="firstName" size="35" type="text" value="Александр">
-                <input id="lastName-input" name="lastName" size="35" type="text" value="Моисеев">
+                <input id="firstName-input" name="firstName" size="15" type="text" value="Александр">
+                <input id="lastName-input" name="lastName" size="15" type="text" value="Моисеев">
                 <button id="getDataByName">Взять данные</button>
             </div>
         </div>
-		<div id="main-frame3-group">
+		<div id="main-frame3-group" class="col-sm mt-5 mr-3">
             <div id="main-frame-input-for-group-text">
-                <h2>Введите название и номер группы</h2>
+                <h2>Название и номер группы</h2>
             </div>
             <div id="main-frame-input-fro-group-stud">
-                <input id="groupName-input" name="groupName" size="35" type="text" value="РКЛМ">
-                <input id="groupNumber-input" name="groupNumber" size="35" type="text" value="12">
+                <input id="groupName-input" name="groupName" size="15" type="text" value="РКЛМ">
+                <input id="groupNumber-input" name="groupNumber" size="15" type="text" value="12">
                 <button id="getDataByGroup">Взять данные</button>
             </div>
         </div>
     </div>
-    <div id="table-frame1">
-        <div id="table-frame2">
+    <div id="table-frame1" class="row mt-4">
+        <div id="table-frame2" class="col-sm mt-2 ml-4">
             <table id="main-table-frame">
-                <caption> Название чего-то</caption>
                 <tr id="table-frame-date">
                     <th> Дата</th>
                     <th colspan="2"> Дата-1</th>
@@ -71,5 +72,8 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
 </body>
 </html>

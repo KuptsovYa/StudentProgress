@@ -12,13 +12,13 @@ $(document).ready(function () {
             function () {
                 $('#modal_form_reg')
                     .css('display', 'block')
-                    .animate({opacity: 1, top: '50%'}, 200);
+                    .animate({opacity: 1, top: '50%'}, 300);
             });
     });
 
     $('#modal_close_reg, #overlay_reg').click(function () {
         $('#modal_form_reg')
-            .animate({opacity: 0, top: '45%'}, 200,
+            .animate({opacity: 0, top: '45%'}, 300,
                 function () {
                     $(this).css('display', 'none');
                     $('#overlay_reg').fadeOut(400);
@@ -32,13 +32,13 @@ $(document).ready(function () {
             function () {
                 $('#modal_form_login')
                     .css('display', 'block')
-                    .animate({opacity: 1, top: '50%'}, 200);
+                    .animate({opacity: 1, top: '50%'}, 300);
             });
     });
 
     $('#modal_close_login, #overlay_login').click(function () {
         $('#modal_form_login')
-            .animate({opacity: 0, top: '45%'}, 200,
+            .animate({opacity: 0, top: '45%'}, 300,
                 function () {
                     $(this).css('display', 'none');
                     $('#overlay_login').fadeOut(400);
