@@ -15,4 +15,6 @@ public interface ProgressionRepository {
     Integer getPeopleCountInGroup(String groupName, String groupNum);
 
     Integer getDisciplineCountGroup(String groupName, String groupNum);
+
+    List<Map<String, Object>> getAllDvoichinki();
 }

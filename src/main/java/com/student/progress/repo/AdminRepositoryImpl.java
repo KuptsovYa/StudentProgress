@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdminRepositoryImpl implements AdminRepository {
@@ -58,6 +59,15 @@ public class AdminRepositoryImpl implements AdminRepository {
 
     @Override
     public String insertStudData(NewStudInsertDataTransformObject newStudInsertDataTransformObject) {
+
+        String selectAlreadyRegistredUser = "select personFirstName, personSecondName from Person where personFirstName = ? and PersonSecondName = ? ;";
+        Object[] selectUser = new Object[]{newStudInsertDataTransformObject.getFirstName(), newStudInsertDataTransformObject.getSecondName()};
+        List<Map<String, Object>> result = jdbcOperations.queryForList(selectAlreadyRegistredUser, selectUser);
+
+        if (result.size() != 0){
+            return "Такой пользователь уже существует";
+        }
+
         String selectSpecStatement = "SELECT idSpeciality FROM Speciality WHERE specialityName = ?";
         Object[] selectSpecObjects = new Object[]{newStudInsertDataTransformObject.getGroupName()};
         Integer idSpec = jdbcOperations.queryForObject(selectSpecStatement, selectSpecObjects, Integer.class);

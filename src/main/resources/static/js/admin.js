@@ -110,7 +110,7 @@ $(document).ready(function () {
             async: false
         }).fail(function (error) {
             console.log(error);
-            console.log('AJAX call failed :(');
+            alert("Такой пользователь уже существует");
         }).done(function (result) {
             console.log(result);
         });

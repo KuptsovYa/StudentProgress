@@ -14,4 +14,6 @@ public interface ProgressionService {
 
    Map<String, List<NamedGrade>> getProgression(GroupDataTransferObject groupDataTransferObject);
 
+   Map<String, List<Grade>> getDvoichniki();
+
 }

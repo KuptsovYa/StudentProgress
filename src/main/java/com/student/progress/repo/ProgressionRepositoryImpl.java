@@ -83,4 +83,18 @@ public class ProgressionRepositoryImpl implements ProgressionRepository {
                 groupDataTransferObject.getGroupNumber());
         return result;
     }
+
+    @Override
+    public List<Map<String, Object>> getAllDvoichinki() {
+        String sql = "select p.personFirstName, p.personSecondName, a.assessment, dt.date, d.disciplineName " +
+                "from personToDiscipline ptd, person p, dateTable dt, assessment a, discipline d " +
+                "where dt.idDate = ptd.idDate " +
+                "and a.idAssessment = ptd.idAssessment " +
+                "and d.idDiscipline = ptd.idDiscipline " +
+                "and p.idPerson = ptd.idPerson " +
+                "and a.idAssessment < 3 " +
+                "order by p.personSecondName;";
+        List<Map<String, Object>> result = jdbcOperations.queryForList(sql);
+        return result;
+    }
 }

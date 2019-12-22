@@ -37,3 +37,12 @@ AND Person.idPerson = PersonToDiscipline.idPerson
 AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline
 AND PersonToDiscipline.idAssessment = Assessment.idAssessment
 AND PersonToDiscipline.idDate = DateTable.idDate;
+
+select p.personFirstName, p.personSecondName, a.assessment, dt.date, d.disciplineName
+from personToDiscipline ptd, person p, dateTable dt, assessment a, discipline d
+where dt.idDate = ptd.idDate
+and a.idAssessment = ptd.idAssessment
+and d.idDiscipline = ptd.idDiscipline
+and p.idPerson = ptd.idPerson
+and a.idAssessment < 3
+order by p.personSecondName;

@@ -1,5 +1,6 @@
 package com.student.progress.service;
 
+import com.student.progress.entity.DatedGrade;
 import com.student.progress.entity.Grade;
 import com.student.progress.entity.NamedGrade;
 import com.student.progress.entity.dto.GroupDataTransferObject;
@@ -67,6 +68,15 @@ public class ProgressionServiceImpl implements ProgressionService {
         return new NamedGrade(defGrade.getAssessment(), defGrade.getDiscipline(), firstName + " " + lastName);
     }
 
+    private DatedGrade createGradeDated(Map<String, Object> gradeList) {
+        Grade defGrade = createGrade(gradeList);
+        return new DatedGrade(
+                defGrade.getAssessment(),
+                defGrade.getDiscipline(),
+                gradeList.get("personFirstName") + " " + gradeList.get("personSecondName"),
+                (String) gradeList.get("date"));
+    }
+
     private Map<String, List<NamedGrade>> transformValuesForGroup(List<Map<String, Object>> result,
                                                                   Integer disciplineCount,
                                                                   Integer peopleCount) {
@@ -93,14 +103,14 @@ public class ProgressionServiceImpl implements ProgressionService {
         return deletePeople(transformedResult, disciplineCount, peopleCount);
     }
 
-    private Map<String, List<NamedGrade>> deletePeople(Map<String, List<NamedGrade>> transformedPeople, Integer disciplineCount, Integer peopleCount){
+    private Map<String, List<NamedGrade>> deletePeople(Map<String, List<NamedGrade>> transformedPeople, Integer disciplineCount, Integer peopleCount) {
         List<String> listToRemove = new ArrayList<>();
-        for (Map.Entry<String, List<NamedGrade>> entry : transformedPeople.entrySet()){
-            if(entry.getValue().size() % disciplineCount*peopleCount != 0){
+        for (Map.Entry<String, List<NamedGrade>> entry : transformedPeople.entrySet()) {
+            if (entry.getValue().size() % disciplineCount * peopleCount != 0) {
                 listToRemove.add(entry.getKey());
             }
         }
-        for (String item : listToRemove){
+        for (String item : listToRemove) {
             transformedPeople.remove(item);
         }
         return transformedPeople;
@@ -123,5 +133,48 @@ public class ProgressionServiceImpl implements ProgressionService {
         return transformValuesForGroup(progressionRepository.getProgressionByStudGroup(groupDto),
                 progressionRepository.getPeopleCountInGroup(groupDto.getGroupName(), groupDto.getGroupNumber()),
                 progressionRepository.getDisciplineCountGroup(groupDto.getGroupName(), groupDto.getGroupNumber()));
+    }
+
+    @Override
+    public Map<String, List<Grade>> getDvoichniki() {
+        List<Map<String, Object>> result = progressionRepository.getAllDvoichinki();
+        List<String> names = getNames(result);
+        Map<String, List<Grade>> transformedResult = new HashMap<>();
+        List<Grade> gradeList = new ArrayList<>();
+        int j = 0;
+        for (int i = 0; i < result.size(); i++) {
+            String fullName = getFullName(result, i);
+            if (names.get(j).equals(fullName)) {
+                gradeList.add(createGradeDated(result.get(i)));
+            } else {
+                j++;
+                String prevFullName = getFullName(result, i - 1);
+                transformedResult.put(prevFullName, gradeList);
+                gradeList = new ArrayList<>();
+                gradeList.add(createGradeDated(result.get(i)));
+            }
+            if (result.size() - 1 == i) {
+                transformedResult.put(fullName, gradeList);
+            }
+        }
+        return transformedResult;
+    }
+
+    private List<String> getNames(List<Map<String, Object>> result) {
+        List<String> names = new ArrayList<>();
+        for (int i = 0; i < result.size(); i++) {
+            String fullName = getFullName(result, i);
+            if (!names.contains(fullName)) {
+                names.add(fullName);
+            }
+        }
+        List<String> sortedNames = new ArrayList<>(names);
+        return sortedNames;
+    }
+
+    private String getFullName(List<Map<String, Object>> result, int i) {
+        String firstName = (String) result.get(i).get("personFirstName");
+        String secondName = (String) result.get(i).get("personSecondName");
+        return firstName + " " + secondName;
     }
 }

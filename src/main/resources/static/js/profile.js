@@ -26,7 +26,9 @@ $(document).ready(function () {
         }).fail(function (error) {
             console.log('AJAX call failed :(');
         }).done(function (data) {
-            $('#main-table-frame tr,th').remove();
+            $('#table-frame2').empty();
+            $('#table-frame2').empty();
+            $('#table-frame2').append('<table id="main-table-frame">');
             appendDefault();
             appendTOSingleOne(data);
         })
@@ -76,6 +78,8 @@ $(document).ready(function () {
         }).fail(function (error) {
             console.log('AJAX call failed :(');
         }).done(function (data) {
+            $('#table-frame2').empty();
+            $('#table-frame2').append('<table id="main-table-frame">');
             $('#main-table-frame tr,th').remove();
             appendDefault();
             appendTOGroup(data);
@@ -127,4 +131,51 @@ $(document).ready(function () {
             }
         }
     }
+
+    $('#getVseDvoichniki').click(function () {
+        $.ajax({
+            type: 'POST',
+            url: '/profile/getDvoichniki',
+            contentType: "application/json;charset=UTF-8",
+            cache: false,
+            async: false
+        }).fail(function (error) {
+            console.log('AJAX call failed :(' + error + "')");
+        }).done(function (data) {
+            $('#main-table-frame tr,th').remove();
+            $('#table-frame2').empty();
+            for (var i = 0; i < Object.keys(data).length; i++) {
+                appendDvoechniki(data, i);
+            }
+        })
+    });
+
+
+    function appendDvoechniki(data, num) {
+        console.log(data);
+        console.log(Object.keys(data));
+        $('#table-frame2').append('<table id="main-table-frame' + num + '">');
+        $('#main-table-frame' + num + '').append('<tr id="table-frame-date' + num + '">');
+        $('#table-frame-date' + num + '').append('<th>Дата</th>');
+        $('#main-table-frame' + num + '').append('<tr id="table-frame-discipline' + num + '">');
+        $('#table-frame-discipline' + num + '').append('<th>Предметы</th>');
+        $('#main-table-frame' + num + '').append('<tr id="grade-to-stud' + num + '">');
+
+        console.log(data[Object.keys(data)[num]].length);
+        for (var i = 0; i < data[Object.keys(data)[num]].length; i++) {
+            $('#table-frame-date' + num + '')
+                .append('<th id="' + num + 'date' + i + '" colspan="1"> ' + data[Object.keys(data)[num]][i].date + ' </th>');
+        }
+
+        console.log(data[Object.keys(data)[num]][0].date);
+
+        for (i = 0; i < data[Object.keys(data)[num]].length; i++) {
+            var dis = data[Object.keys(data)[num]][i].discipline;
+            var assess = data[Object.keys(data)[num]][i].assessment;
+            $('#table-frame-discipline' + num + '').append('<th id="' + num + 'discipline' + i + '">' + dis + '</th>');
+            $('#grade-to-stud' + num + '').append('<td id="' + num + 'assessment' + i + '">' + assess + '</td>');
+        }
+        $('#grade-to-stud' + num + '').prepend('<th>' + Object.keys(data)[num] + '</th>');
+    }
+
 });

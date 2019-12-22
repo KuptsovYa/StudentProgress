@@ -32,4 +32,10 @@ public class ProfileRestController {
     public Map<String, List<NamedGrade>> getProgressionByGroupName(@RequestBody final GroupDataTransferObject groupDataTransferObject){
         return progressionService.getProgression(groupDataTransferObject);
     }
+
+    @PostMapping("/profile/getDvoichniki")
+    @ResponseBody
+    public Map<String, List<Grade>> getAllDvoichniki(){
+        return progressionService.getDvoichniki();
+    }
 }
